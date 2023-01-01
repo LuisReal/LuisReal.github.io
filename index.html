@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="Interfaz.css"/>
+    
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>   
+    <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
+</head>
+<body>
+    <div></div>
+    <h1 style="text-align:center; color:white">Bienvenido a Movie Cats</h1>
+    
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar-inicio">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><p id="clock" style="color: white; font-size: 1em;">Bloque</p></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ms-auto"> <!--ms-auto coloca los elementos a la derecha-->
+              <button class="btn btn-danger" id="login">Login</button>
+              
+            </div>
+          </div>
+        </div>
+    </nav>
+
+    <!--*******************************************INTERFAZ LOGIN *****************************************-->
+
+    <div class="container " id="div-login" style="display: block;">
+        
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 py-4 "></div>
+            
+            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 py-4 bg-white">
+                <h2>LOGIN</h2>
+                
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username-login" placeholder="Username" autofocus>
+                </div>
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password-login" placeholder="Password" autofocus>
+                </div>
+                
+                <div class="mb-3">
+                    
+                    <input type="radio" value="administrador" id ="boton-radio"/>Administrador<br/>
+                </div>
+                <div class="d-grid gap-2"><!--Coloca cada boton a lo largo-->
+                    <button class="btn btn-success" id="enviar-login">SIGN IN</button>
+                    
+                </div>
+                
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 py-4 "></div>
+        </div>
+    </div>
+
+    <!--*******************************************INTERFAZ ADMINISTRADOR *****************************************-->
+
+    <div class="container " id="div-administrador" style="display: none;">
+        <div class="row" style="text-align: center; font-family: Consolas, monaco, monospace; border: 2px solid; background-color: #EBF5FB; color: #8E44AD ; border-left: none; border-right: none; border-color: black; margin-top: 5px;">
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 py-4"></div>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 py-4" style="margin-left: -35px;">
+                
+                <input type="file" class="btn btn-danger " id="carga-archivo" hidden>
+                <button class="btn btn-danger" id="btn-peliculas">Cargar Peliculas</button>
+
+                
+                <button class="btn btn-primary" id="btn-clientes">Cargar Clientes</button>
+
+                
+                <button class="btn btn-success" id="btn-actores">Cargar Actores</button>
+
+                
+                <button class="btn btn-warning" id="btn-categorias">Cargar Categorias</button>
+                
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 py-4">
+                <button class="btn btn-primary" id="btn-blockchain">Blockchain</button>
+            </div>
+        </div>
+        
+            
+        <div class="row" style="text-align: center; font-family: Consolas, monaco, monospace; background-color: #EBF5FB; color: #8E44AD ; border-left: none; border-right: none;">
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 py-4" style="text-align: center; font-family: Consolas, monaco, monospace; background-color: #EBF5FB;  border-left: none; border-right: none; border-color: black">
+                <p  class="graficas-label">Graficas</p>
+                
+                <div class="d-grid gap-2">
+                    <button class="btn btn-danger" id="grafica-peliculas">Grafica Peliculas</button>
+                    <button class="btn btn-primary " id="grafica-clientes" >Grafica Clientes</button>
+                    <button class="btn btn-success " id ="grafica-actores">Grafica Actores</button>
+                    <button class="btn btn-warning " id ="grafica-categorias">Grafica Categorias</button>
+                </div>
+
+                     
+            </div>
+            
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 py-4 bg-white" id="scroll-table">
+                
+                <div id="lienzo"></div>
+                
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 py-4" style="background-color: #EBF5FB; color: #8E44AD ; border-left: none; border-right: none; border-color: black; margin-top: 5px;">
+                <button class="btn btn-success" id="descargar-grafo">Descargar Grafo</button>
+            </div>
+        </div>
+    </div>
+
+
+    
+
+    <!--***************************************INTERFAZ DE BLOCKCHAIN********************************-->
+
+    <div class="container " id="div-blockchain" style="display: none;">
+        <div class="row" style="text-align: center; font-family: Consolas, monaco, monospace; background-color: #EBF5FB; color: #8E44AD ; border-left: none; border-right: none;">
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 py-4">
+                <input type="text" id="new-time">
+                <label>segundos</label>
+                <button class="btn btn-success" id="btn-tiempo">Modificar Tiempo</button>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2 py-4">
+
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2 py-4">
+                <button class="btn btn-success" id="btn-bloque">Generar Bloque</button>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div style="text-align: center; font-family: Consolas, monaco, monospace; background-color: #EBF5FB; color: #8E44AD ; border-left: none; border-right: none;"><h1>Blockchain</h1></div>
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 py-4 bg-white" id="lienzo-blockchain" ></div>
+        </div>
+        <div class="row">
+            <div style="text-align: center; font-family: Consolas, monaco, monospace; background-color: #EBF5FB; color: #8E44AD ; border-left: none; border-right: none;"><h1>Arbol Merkle</h1></div>
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 py-4 bg-white" id="lienzo-merkle"></div>
+        </div>
+    </div>
+
+
+    <!--***************************************INTERFAZ DE USUARIO********************************-->
+    
+    <div class="container " id="div-usuario" style="display: none;">
+        <h1 style="text-align: center; font-family: Consolas, monaco, monospace; border: 2px solid; background-color: #EBF5FB; color: #8E44AD ; border-left: none; border-right: none; border-color: black; margin-top: 5px;">INTERFAZ DE USUARIO</h1>
+        <div class="row">
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 py-4 bg-white">
+                
+                <h1 id="h-usuario" style="text-align: center; font-family: Consolas, monaco, monospace; border: 2px solid; border-radius: 15px; border-color: #808B96;"></h1>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 py-4 bg-white">
+                <button class="btn btn-success" id="btn-ver-actores">Ver actores</button>
+                <button class="btn btn-success" id="btn-ver-categoria">Ver Categoria</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 py-4 bg-white"></div>
+            <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10 py-4 bg-white">
+                <div id="scroll-table">
+                    <table class="table table-dark table-striped" id="tabla-peliculas">
+                        <thead>
+                            <tr>
+                                <th class="centrado" colspan= 5>Listado de Peliculas</th>
+                            </tr>
+
+                            <tr>
+                                <th style="text-align: center;">Pelicula</th>
+                                <th style="text-align: center;">Descripcion</th>
+                                <th style="text-align: center;">Precio</th>
+                                <th style="text-align: center;">Informacion</th>
+                                <th style="text-align: center;">Alquilar</th>
+                            </tr>
+                        </thead>
+                        
+                        
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!--***************************************VISTA POR PELICULA   ********************************-->
+    <div class="container " id="div-pelicula" style="display: none;">
+        <div class="row" style="background-color: #F4F6F7;">
+            <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10 py-4">
+                <h1 style="text-align: center; font-family: Consolas, monaco, monospace; border: 2px solid; border-radius: 15px;">VISTA POR PELICULA</h1>
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 py-4">
+                <button class="btn btn-success" id="btn-regresar">Regresar</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 py-4 bg-white">
+                <h1 style="text-align:center" id="titulo-pelicula">Titulo Pelicula</h1>
+                <p style="text-align: center;" id="descripcion-pelicula">Descripcion</p>
+                <input type="text" id="puntuacion">
+                <button class="btn btn-primary" id="modificar-puntuacion">Modificar Puntuacion</button>
+                <button class="btn btn-danger" id="alquilar">Alquilar</button>
+                
+            </div>
+        </div>
+
+        <div class="row">
+            
+            <div id="comentarios" style="height: 150px; width: 2000px; background-color:#F4F6F7;  border-color: #ABEBC6 ">
+                <h2 style="text-align:center; background-color: #BDC3C7; border-radius: 10px;">Comentarios</h2>
+                <p style="text-align:center;  font-weight:bold" id="p-comentario"></p>
+            </div>
+            <textarea id="comentario"></textarea>
+            <button class="btn btn-primary" id="btn-publicar">Publicar</button>
+        </div>
+    </div>
+
+    <!--***************************************INTERFAZ DE ACTORES********************************-->
+
+    <div class="container " id="div-actores" style="display: none;">
+        <h1 style="text-align: center; font-family: Consolas, monaco, monospace; border: 2px solid; background-color: #EBF5FB; color: #8E44AD ; border-left: none; border-right: none; border-color: black; margin-top: 5px;">INTERFAZ DE ACTORES<br><button class="btn btn-success" id="btn-regresar-actores">Regresar</button></h1>
+        
+        <div class="row" >
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 py-4 "></div>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 py-4 "  style="text-align: center; font-family: Consolas, monaco, monospace; border: 2px solid; background-color: #EBF5FB; color: #8E44AD ; border-left: none; border-right: none; border-color: black; margin-top: 5px;">
+                <input type="radio" id="btn-preorden" name="orden" value="preorden" checked>preorden
+                <input type="radio" id="btn-inorden" name ="orden" value="inorden">inorden
+                <input type="radio" id="btn-postorden" name="orden" value="postorden">postorden
+                <button id="radio-validar" class="btn btn-primary">Validar</button>
+                
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 py-4 "></div>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 py-4 bg-white">
+                <h1 style="text-align:center">Actores</h1>
+                <div id="scroll-table">
+                    <table class="table table-light table-striped" id="tabla-actores">
+                        <thead>
+                            <tr>
+                                <th class="centrado" colspan= 2>Listado de Actores</th>
+                            </tr>
+                            <tr>
+                                <th style="text-align: center;">Nombre</th>
+                                <th style="text-align: center;">Descripcion</th>
+                            </tr>
+                        </thead>
+                        
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--***************************************INTERFAZ DE CATEGORIAS********************************-->
+
+    <div class="container " id="div-categorias" style="display: none;">
+        <h1 style="text-align: center; font-family: Consolas, monaco, monospace; border: 2px solid; background-color: #EBF5FB; color: #8E44AD ; border-left: none; border-right: none; border-color: black; margin-top: 5px;">INTERFAZ DE CATEGORIAS<br><button class="btn btn-success" id="btn-regresar-categorias">Regresar</button></h1>
+        
+        <div class="row">
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 py-4 "></div>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 py-4 bg-white">
+                <h1 style="text-align:center">CATEGORIAS</h1>
+                <div id="scroll-table">
+                    <table class="table table-light table-striped" id="tabla-categorias">
+                        
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <script type="text/javascript" src="estructuras.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="sha256.min.js"></script>
+    <script type="text/javascript" src="saveSvgAsPng.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+</body>
+</html>

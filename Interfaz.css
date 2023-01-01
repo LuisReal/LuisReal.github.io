@@ -1,0 +1,82 @@
+body{
+    background: #7F7FD5;  /* descargado de uigradientes pagina web*/
+    background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #a2a8a8, #75787e, #E5E7E9 ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.bg{
+    border: 1px solid black;
+}
+
+.bg-white{
+    background-color: #ffffff;
+}
+#descripcion{
+    resize: none;
+}
+
+.centrado{
+    text-align: center;
+    vertical-align: middle;
+}
+
+.graficas-label{
+    color: #5B2C6F ;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 15px;
+    height: 50px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#fila-labels{
+    background:linear-gradient(to right, #ABEBC6 , #58D68D, #239B56  );
+}
+
+.cargar-archivo{
+    background:linear-gradient(to right, #ECF0F1, #CACFD2 , #95A5A6 );
+    font-size: 20px;
+    text-align: center;
+    padding-top: 5px;
+    height: 40px;
+    margin-left: 10px;
+    width: 200px;
+    border-radius: 5px;
+}
+
+.h-administrador{
+    font-size: 20px;
+    text-align: center;
+    padding-top: 5px;
+    height: 40px;
+     
+}
+
+.boton{
+    background-color: #58D68D;
+    height: 50px;
+    margin-left: -5px;
+    border: none;
+    padding-left: 15px;
+}
+
+#label-publicar-cancion{
+    background-color: #D5D8DC ;
+    width: 300px;
+    border-radius: 5px;
+    border-color: #239B56;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: medium;
+    text-align: center;
+}
+
+#scroll-table{
+    height: 400px !important;
+    overflow: auto;
+    width: 725px;
+    
+}
